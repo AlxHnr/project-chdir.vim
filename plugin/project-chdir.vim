@@ -62,7 +62,6 @@ function! s:project_chdir() " {{{
       if filereadable(l:path_to_check) || isdirectory(l:path_to_check)
         execute 'lchdir! ' . escape(l:path, '\ ')
         let l:priority = g:project_chdir#items[l:file_to_search]
-        break
       endif
     endfor
   endwhile
