@@ -10,9 +10,9 @@ CONTENTS                                                 *project-chdir-contents
 ===============================================================================
 1. Description                                        *project-chdir-description*
 
-This plugin searches for the root of the project to which the current file
-belongs and chdirs into it. A project root can contain a .git/ directory or
-just a plain Makefile. See the priorities defined in |g:project_chdir#items|.
+This plugin changes the current working directory to the projects root. It
+works by searching from a files directory upwards until a project file is
+found.
 
 ===============================================================================
 2. Options                                                *project-chdir-options*
@@ -20,11 +20,19 @@ just a plain Makefile. See the priorities defined in |g:project_chdir#items|.
 -------------------------------------------------------------------------------
 2.1 Define files/directories to search for                *g:project_chdir#items*
 
-Associates search items with their priorities.
-
-Default:
+Project files can be defined by associating filenames with priorities.
+Items in this dictionary will override and extend the internal defaults:
 >
   let g:project_chdir#items =
+    \ {
+    \   '.git':      2,
+    \   'Makefile':  1,
+    \   'README.md': 0,
+    \ }
+<
+Internal defaults:
+>
+  let s:default_items =
     \ {
     \   '.hg':            1,
     \   '.bzr':           1,
